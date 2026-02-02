@@ -26,14 +26,20 @@
 
 <button onclick="window.location.href='yes.html'">Yes 😇 Maaf Kiya 🐣</button>
 
-<button onclick="document.getElementById('gifDiv').style.display='block'">
+<button onclick="showAngryGif()">
   Maaf Nahi Kiya
 </button>
 
-<!-- Hidden GIF div -->
 <div id="gifDiv">
-  <img src="https://tenor.com/2vLd.gif" alt="Angry GIF">
+  <img src="https://media.tenor.com/712W7pM_f_YAAAAC/mochi-mochi-peach-cat-angry.gif" alt="Angry GIF" width="300">
+  <p>Abhi bhi gussa? Pls maaf kardo! 🥺</p>
 </div>
+
+<script>
+  function showAngryGif() {
+    document.getElementById('gifDiv').style.display = 'block';
+  }
+</script>
 
 </body>
 </html>
