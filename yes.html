@@ -68,24 +68,6 @@
       font-size: 1.2rem;
     }
 
-    button {
-      padding: 12px 30px;
-      font-size: 16px;
-      background: #d63384;
-      color: white;
-      border: none;
-      border-radius: 50px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      margin-top: 20px;
-      box-shadow: 0 4px 15px rgba(214, 51, 132, 0.3);
-    }
-
-    button:hover {
-      background: #b0246b;
-      transform: translateY(-2px);
-    }
-
     .heart {
       position: fixed;
       color: #ff80ab;
@@ -99,13 +81,32 @@
       0% { transform: translateY(100vh) rotate(0deg); opacity: 1; }
       100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
     }
+
+    /* Music Button UI */
+    #musicControl {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #d63384;
+      color: white;
+      padding: 15px;
+      border-radius: 50%;
+      cursor: pointer;
+      z-index: 100;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      font-size: 20px;
+      border: 2px solid white;
+      transition: 0.3s;
+    }
   </style>
 </head>
 <body>
 
   <div style="display:none;">
-    <iframe width="0" height="0" src="https://www.youtube.com/embed/5U7zM-M_z5A?autoplay=1&loop=1&playlist=5U7zM-M_z5A" frameborder="0" allow="autoplay"></iframe>
+    <iframe id="pookieMusic" width="0" height="0" src="https://www.youtube.com/embed/5U7zM-M_z5A?enablejsapi=1&autoplay=1&loop=1&playlist=5U7zM-M_z5A" frameborder="0" allow="autoplay"></iframe>
   </div>
+
+  <div id="musicControl" onclick="toggleMusic()">🎵</div>
 
   <h1>Thankkk youuu baby jiii! 🥹💕🎉</h1>
 
@@ -115,13 +116,19 @@
     <div class="personal">
       Kitna dussa hoga Mera motu humse🥹🦄 mela pookie kuchupuchu🌸✨ iiii loveeeeee uuuu thee mosttt🥹🫀💕 hum ye website kafi time se bna raha tha humse ho nhi Raha tha🥺 abhi bhi pta noi kab complete hoga☹️🤌🏻 first time bna raha 🥺💗.. i wasss sooo fucking horny babyy jii🥵🥵🥵 aur us snap k baad uffffffff🤤🥵🥵 heartattack sa aa raha tha🥵 abhi bhi ek haat se type kr raha hai😩 upar small window pe wahi snap hai uff🤤🎀 aur dushre haat se amamamamam 🤤💕ufff chomuuu yeee thighsss😫🥵aur ye sexyyyyyy perfect figure 🫣itna sexyyy ass curve🤤🤤.. bahut amamamamam thoughts aa raha hai jaan😩 subhe se he.. lakin jaise snap dekha pura body cold ho gaya 🥵🥶kha raha tha tabhi MMY papa dono ki bike sahi krwa lao🥺🥺🥺🥺humko gussa aa gaya aur hum chla gaya😭 fr jo hum wo apko btaya uske baad kr aa k🥺🌺 hum dekha lakin betu🥺🥺 gusse me hum kuch reply krta to apko aur aacha nhi lagta🥺🤌🏻🤌🏻 abhi tab bahut ajib lag raha tha kuch aur bhi chl rha tha mind me🥺 shubham bhi humko itna bola insta pe lakin hum aaj kuch bol nhi paya 🥺🤌🏻rona aa raha tha tab🥺.. Aisa nhi hai ki hum pic nhi dekha😩ya nhi socha ya hum sab kiya but us mood me hum ghr aa k reply krta to aacha nhi hota shayad 🥺💗.. i lovee youu💕 and I miss u🥺🎀🎀 n i always think and imagine fucking youu🦄 first day ap dikhaya tha wo shayad alag hoga but abhi bhi hum waisa he hai🥺💕usse bhi jada addicted 🥹🫀🪻
       
-      <span class="signature">I lovee you mera bachuu🥹🎀🦄🦄</span>
+      <span class="signature">I loveee youu mela bachuu🥹🦄🎀🎀</span>
     </div>
 
-    <button onclick="window.location.href='index.html'">Go Back</button>
+    <button style="padding: 10px 20px; border-radius: 20px; border: none; background: #d63384; color: white; cursor: pointer;" onclick="window.location.href='index.html'">Go Back</button>
   </div>
 
   <script>
+    function toggleMusic() {
+      const iframe = document.getElementById('pookieMusic');
+      iframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+      alert("Music Started! Enjoy Pookie ❤️");
+    }
+
     function createHeart() {
       const heart = document.createElement('div');
       heart.classList.add('heart');
