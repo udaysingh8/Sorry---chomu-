@@ -4,7 +4,7 @@
   <title>For You</title>
   <style>
     body {
-      font-family: Arial;
+      font-family: Arial, sans-serif;
       text-align: center;
       padding: 40px;
       background: #ffe6f0;
@@ -13,6 +13,18 @@
       padding: 10px 20px;
       font-size: 18px;
       margin: 10px;
+      cursor: pointer;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+    }
+    /* This keeps the GIF and message hidden at first */
+    #gifDiv {
+      display: none; 
+      margin-top: 20px;
+    }
+    #gifDiv img {
+      width: 300px;
+      border-radius: 15px;
     }
   </style>
 </head>
@@ -26,17 +38,18 @@
 
 <button onclick="window.location.href='yes.html'">Yes 😇 Maaf Kiya 🐣</button>
 
-<button onclick="showAngryGif()">
+<button onclick="showGussa()">
   Maaf Nahi Kiya
 </button>
 
 <div id="gifDiv">
-  <img src="https://media.tenor.com/712W7pM_f_YAAAAC/mochi-mochi-peach-cat-angry.gif" alt="Angry GIF" width="300">
-  <p>Abhi bhi gussa? Pls maaf kardo! 🥺</p>
+  <img src="https://media.tenor.com/712W7pM_f_YAAAAC/mochi-mochi-peach-cat-angry.gif" alt="Angry GIF">
+  <h3 style="color: #d63384;">I’ll wait. You matter to me 🙂</h3>
 </div>
 
 <script>
-  function showAngryGif() {
+  function showGussa() {
+    // This makes the hidden div visible
     document.getElementById('gifDiv').style.display = 'block';
   }
 </script>
