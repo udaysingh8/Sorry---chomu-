@@ -1,58 +1,153 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>For You</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>I'm Sorry Chomuu</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       text-align: center;
-      padding: 40px;
-      background: #ffe6f0;
+      margin: 0;
+      padding: 20px;
+      background: linear-gradient(135deg, #ffe6f0 0%, #ffcce0 100%);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      overflow-x: hidden;
     }
+
+    .container {
+      max-width: 500px;
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(10px);
+      padding: 30px;
+      border-radius: 30px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      margin-top: 5vh;
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      z-index: 1;
+    }
+
+    h1 {
+      color: #d63384;
+      font-size: 2.2rem;
+      margin-bottom: 10px;
+    }
+
+    .main-gif {
+      width: 100%;
+      max-width: 280px;
+      border-radius: 20px;
+      box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+    }
+
+    p { font-size: 1.2rem; color: #444; margin: 15px 0; }
+    h2 { font-size: 1rem; color: #666; font-weight: normal; margin-bottom: 25px; }
+
+    .btn-group {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
     button {
-      padding: 10px 20px;
-      font-size: 18px;
-      margin: 10px;
+      padding: 12px 25px;
+      font-size: 16px;
+      border: none;
+      border-radius: 50px;
       cursor: pointer;
-      border-radius: 10px;
-      border: 1px solid #ccc;
+      transition: all 0.3s ease;
+      font-weight: bold;
     }
-    /* This keeps the GIF and message hidden at first */
+
+    .yes-btn {
+      background: #d63384;
+      color: white;
+      box-shadow: 0 4px 15px rgba(214, 51, 132, 0.3);
+    }
+
+    .no-btn {
+      background: white;
+      color: #d63384;
+      border: 1px solid #d63384;
+    }
+
+    button:hover {
+      transform: translateY(-3px) scale(1.05);
+    }
+
     #gifDiv {
       display: none; 
-      margin-top: 20px;
+      margin-top: 25px;
+      animation: fadeIn 0.5s ease;
     }
-    #gifDiv img {
-      width: 300px;
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .angry-gif {
+      width: 200px;
       border-radius: 15px;
+    }
+
+    /* Floating Unicorns */
+    .unicorn {
+      position: fixed;
+      bottom: -50px;
+      font-size: 30px;
+      z-index: 0;
+      animation: floatUp 6s linear infinite;
+      opacity: 0.6;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(0) rotate(0deg); opacity: 0.6; }
+      100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
     }
   </style>
 </head>
 <body>
 
-<h1>I’m Sorrry Chomuu🥺💗</h1>
-<img src="https://media.tenor.com/9Rkt7dRMiYIAAAAC/sorry-cute.gif" alt="Cute Sorry GIF" width="300">
+  <div class="container">
+    <h1>I’m Sorrry Chomuu🥺💗</h1>
+    <img src="https://media.tenor.com/9Rkt7dRMiYIAAAAC/sorry-cute.gif" class="main-gif" alt="Cute Sorry">
 
-<p>Maaf Kal Do Piddu🦄</p>
-<h2>Maaf Kal do fir next page me chalte hai🥹🐣</h2>
+    <p>Maaf Kal Do Piddu🦄</p>
+    <h2>Maaf Kal do fir next page me chalte hai🥹</h2>
 
-<button onclick="window.location.href='yes.html'">Maaf Kiya 🐣</button>
+    <div class="btn-group">
+      <button class="yes-btn" onclick="window.location.href='yes.html'">Maaf Kiya 🐣</button>
+      <button class="no-btn" onclick="showGussa()">Maaf Nahi Kiya</button>
+    </div>
 
-<button onclick="showGussa()">
-  Maaf Nahi Kiya
-</button>
+    <div id="gifDiv">
+      <img src="https://media.tenor.com/712W7pM_f_YAAAAC/mochi-mochi-peach-cat-angry.gif" class="angry-gif" alt="Angry GIF">
+      <h3 style="color: #d63384; margin-top: 10px;">Noiii🙂 Pls kardo na!</h3>
+    </div>
+  </div>
 
-<div id="gifDiv">
-  <img src="https://tenor.com/2vLd.gif" alt="Angry GIF">
-  <h3 style="color: #d63384;">Noiii🙂</h3>
-</div>
+  <script>
+    function showGussa() {
+      document.getElementById('gifDiv').style.display = 'block';
+    }
 
-<script>
-  function showGussa() {
-    // This makes the hidden div visible
-    document.getElementById('gifDiv').style.display = 'block';
-  }
-</script>
+    // Generate floating unicorns
+    function createUnicorn() {
+      const unicorn = document.createElement('div');
+      unicorn.classList.add('unicorn');
+      unicorn.innerHTML = '🦄';
+      unicorn.style.left = Math.random() * 100 + 'vw';
+      unicorn.style.animationDuration = (Math.random() * 3 + 4) + 's';
+      document.body.appendChild(unicorn);
+      setTimeout(() => unicorn.remove(), 7000);
+    }
+    setInterval(createUnicorn, 600);
+  </script>
 
 </body>
 </html>
