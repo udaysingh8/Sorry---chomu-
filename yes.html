@@ -14,7 +14,7 @@
       overflow-x: hidden;
     }
 
-    /* Floating Icons Background */
+    /* Floating Icons */
     .heart { position: fixed; bottom: -50px; z-index: 0; animation: floatUp 5s linear infinite; opacity: 0.6; font-size: 20px; }
     @keyframes floatUp { 0% { transform: translateY(0); opacity: 0.6; } 100% { transform: translateY(-110vh); opacity: 0; } }
 
@@ -26,28 +26,31 @@
 
     h1 { color: var(--primary); text-align: center; font-size: 1.8rem; }
     
-    /* Typing Text Style */
     #typing-text { font-size: 1.1rem; line-height: 1.8; color: #444; min-height: 100px; }
 
-    /* Treasure Box Style */
-    .treasure-box {
-      margin: 30px auto; text-align: center; cursor: pointer; transition: 0.3s;
+    /* Treasure Box - Pehle hide rahega */
+    #treasure-box {
+      display: none; /* Starting mein hidden */
+      margin: 30px auto; text-align: center; cursor: pointer;
+      animation: fadeIn 1.5s ease-in forwards;
     }
-    .box-icon { font-size: 80px; filter: drop-shadow(0 5px 15px rgba(0,0,0,0.1)); }
-    .treasure-box:hover { transform: scale(1.1); }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    
+    .box-icon { font-size: 80px; filter: drop-shadow(0 5px 15px rgba(0,0,0,0.1)); transition: 0.3s; }
+    .box-icon:hover { transform: scale(1.1) rotate(5deg); }
 
-    /* Proposal Modal (Hidden at first) */
+    /* Proposal Modal */
     #proposal-modal {
       display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(0,0,0,0.8); z-index: 100; justify-content: center; align-items: center;
+      background: rgba(0,0,0,0.85); z-index: 100; justify-content: center; align-items: center;
     }
     .modal-content {
       background: white; padding: 30px; border-radius: 30px; text-align: center;
-      max-width: 350px; width: 85%; border: 5px solid var(--primary);
+      max-width: 350px; width: 85%; border: 5px solid var(--primary); position: relative;
     }
 
     .yes-val { background: #4CAF50; color: white; border: none; padding: 15px 30px; border-radius: 50px; font-weight: bold; cursor: pointer; font-size: 18px; margin: 10px; transition: 0.2s; }
-    .no-val { background: #f44336; color: white; border: none; padding: 10px 20px; border-radius: 50px; cursor: pointer; margin: 10px; transition: 0.2s; }
+    .no-val { background: #f44336; color: white; border: none; padding: 10px 20px; border-radius: 50px; cursor: pointer; margin: 10px; transition: 0.2s; position: relative; }
 
     #musicBtn { position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 200; font-size: 24px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
   </style>
@@ -63,7 +66,7 @@
     <h1>Thankkk youuu Baby! 🥹💕</h1>
     <div id="typing-text"></div>
 
-    <div class="treasure-box" onclick="openTreasure()">
+    <div id="treasure-box" onclick="openTreasure()">
       <div class="box-icon">🎁</div>
       <p style="font-weight: bold; color: var(--primary);">Ek chota sa surprise hai... Click me! ✨</p>
     </div>
@@ -79,43 +82,43 @@
   </div>
 
   <script>
-    // 1. Typing Effect Logic
-    const message = "Kitna gussa hoga Mera motu humse🥹🦄 mela pookie kuchupuchu🌸✨ iiii loveeeeee uuuu thee mosttt🥹🫀💕 hum ye website kafi time se bna raha tha... I was so horny baby jii🥵 aur us snap k baad ufff🤤 heartattack aa raha tha... I promise main hamesha tumhara khayal rakhunga 🙏💖";
+    const message = "Kitna dussa hoga Mera motu humse🥹🦄 mela pookie kuchupuchu🌸✨ iiii loveeeeee uuuu thee mosttt🥹🫀💕 hum ye website kafi time se bna raha tha humse ho nhi Raha tha🥺 abhi bhi pta noi kab complete hoga☹️🤌🏻 first time bna raha 🥺💗.. i lovee youu💕 and I miss u🥺🎀🎀 n i always think and imagine fucking youu🦄 first day ap dikhaya tha wo shayad alag hoga but abhi bhi hum waisa he hai🥺💕usse bhi jada addicted 🥹🫀🪻 Main hamesha tumhara khayal rakhunga 🙏💖";
+    
     let i = 0;
     function typeWriter() {
       if (i < message.length) {
         document.getElementById("typing-text").innerHTML += message.charAt(i);
         i++;
-        setTimeout(typeWriter, 50).then(window.scrollTo(0, document.body.scrollHeight));
+        setTimeout(typeWriter, 50);
+        window.scrollTo(0, document.body.scrollHeight);
+      } else {
+        // Jab typing khatam ho jaye, box ko show karo
+        document.getElementById("treasure-box").style.display = "block";
       }
     }
     window.onload = typeWriter;
 
-    // 2. Music Logic
     function playMusic() {
       var song = document.getElementById("bgMusic");
       song.play(); document.getElementById("musicBtn").innerHTML = "❤️";
     }
 
-    // 3. Treasure Box Logic
     function openTreasure() {
       document.getElementById("proposal-modal").style.display = "flex";
     }
 
-    // 4. Growing Yes Button Logic
     let yesSize = 18;
     function growYes() {
-      yesSize += 15;
+      yesSize += 25; // Zyada bada hoga har click pe
       const yesBtn = document.getElementById("yesValBtn");
       yesBtn.style.fontSize = yesSize + "px";
       yesBtn.style.padding = (yesSize/1.2) + "px " + (yesSize*1.5) + "px";
       
       const noBtn = document.getElementById("noValBtn");
       noBtn.innerText = "Sachi? 🥺";
-      if(yesSize > 100) noBtn.style.display = 'none'; // No button gayab ho jayega
+      if(yesSize > 120) noBtn.style.display = 'none';
     }
 
-    // Hearts background
     function createHeart() {
       const heart = document.createElement('div');
       heart.className = 'heart';
