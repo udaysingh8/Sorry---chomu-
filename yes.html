@@ -14,29 +14,42 @@
       overflow-x: hidden;
     }
 
-    /* Floating Icons */
-    .heart { position: fixed; bottom: -50px; z-index: 0; animation: floatUp 5s linear infinite; opacity: 0.6; font-size: 20px; }
-    @keyframes floatUp { 0% { transform: translateY(0); opacity: 0.6; } 100% { transform: translateY(-110vh); opacity: 0; } }
+    /* Floating Photo Bubbles */
+    .bubble {
+      position: fixed;
+      bottom: -150px;
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      border: 4px solid white;
+      background-size: cover;
+      background-position: center;
+      box-shadow: 0 5px 20px rgba(214, 51, 132, 0.3);
+      z-index: 5;
+      animation: floatBubble 9s linear infinite;
+    }
+
+    @keyframes floatBubble {
+      0% { transform: translateY(0) scale(0.8); opacity: 0; }
+      20% { opacity: 1; }
+      100% { transform: translateY(-110vh) scale(1.2); opacity: 0; }
+    }
 
     .container {
-      max-width: 600px; background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(12px);
+      max-width: 600px; background: rgba(255, 255, 255, 0.75); backdrop-filter: blur(15px);
       padding: 30px; border-radius: 30px; border: 1px solid rgba(255, 255, 255, 0.5);
       z-index: 10; text-align: left; box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      margin-top: 20px;
     }
 
     h1 { color: var(--primary); text-align: center; font-size: 1.8rem; }
-    
     #typing-text { font-size: 1.1rem; line-height: 1.8; color: #444; min-height: 100px; }
 
-    /* Treasure Box - Pehle hide rahega */
     #treasure-box {
-      display: none; /* Starting mein hidden */
-      margin: 30px auto; text-align: center; cursor: pointer;
+      display: none; margin: 30px auto; text-align: center; cursor: pointer;
       animation: fadeIn 1.5s ease-in forwards;
     }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-    
-    .box-icon { font-size: 80px; filter: drop-shadow(0 5px 15px rgba(0,0,0,0.1)); transition: 0.3s; }
+    .box-icon { font-size: 80px; transition: 0.3s; }
     .box-icon:hover { transform: scale(1.1) rotate(5deg); }
 
     /* Proposal Modal */
@@ -46,11 +59,11 @@
     }
     .modal-content {
       background: white; padding: 30px; border-radius: 30px; text-align: center;
-      max-width: 350px; width: 85%; border: 5px solid var(--primary); position: relative;
+      max-width: 350px; width: 85%; border: 5px solid var(--primary);
     }
 
-    .yes-val { background: #4CAF50; color: white; border: none; padding: 15px 30px; border-radius: 50px; font-weight: bold; cursor: pointer; font-size: 18px; margin: 10px; transition: 0.2s; }
-    .no-val { background: #f44336; color: white; border: none; padding: 10px 20px; border-radius: 50px; cursor: pointer; margin: 10px; transition: 0.2s; position: relative; }
+    .yes-val { background: #4CAF50; color: white; border: none; padding: 15px 30px; border-radius: 50px; font-weight: bold; cursor: pointer; font-size: 18px; margin: 10px; }
+    .no-val { background: #f44336; color: white; border: none; padding: 10px 20px; border-radius: 50px; cursor: pointer; margin: 10px; }
 
     #musicBtn { position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 200; font-size: 24px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
   </style>
@@ -82,25 +95,40 @@
   </div>
 
   <script>
-    const message = "Kitna dussa hoga Mera motu humse🥹🦄 mela pookie kuchupuchu🌸✨ iiii loveeeeee uuuu thee mosttt🥹🫀💕 hum ye website kafi time se bna raha tha humse ho nhi Raha tha🥺 abhi bhi pta noi kab complete hoga☹️🤌🏻 first time bna raha 🥺💗.. i lovee youu💕 and I miss u🥺🎀🎀 n i always think and imagine fucking youu🦄 first day ap dikhaya tha wo shayad alag hoga but abhi bhi hum waisa he hai🥺💕usse bhi jada addicted 🥹🫀🪻 Main hamesha tumhara khayal rakhunga 🙏💖";
+    // Message with your request
+    const message = "Kitna dussa hoga Mera motu humse... (aapka message yahan)... Main hamesha tumhara khayal rakhunga 🙏💖";
     
+    // Using your Instasize link in the bubble
+    const photoUrl = "https://instasize.com/p/1dee28c6d4152ad6c31515424df20ae92715680d51b88a594e4bfbba247b7e9f";
+
     let i = 0;
     function typeWriter() {
       if (i < message.length) {
         document.getElementById("typing-text").innerHTML += message.charAt(i);
         i++;
         setTimeout(typeWriter, 50);
-        window.scrollTo(0, document.body.scrollHeight);
       } else {
-        // Jab typing khatam ho jaye, box ko show karo
         document.getElementById("treasure-box").style.display = "block";
       }
     }
     window.onload = typeWriter;
 
+    // Bubbles logic
+    function createBubble() {
+      const bubble = document.createElement('div');
+      bubble.className = 'bubble';
+      // Background image set to your link
+      bubble.style.backgroundImage = `url('${photoUrl}')`; 
+      bubble.style.left = Math.random() * 100 + 'vw';
+      bubble.style.animationDuration = (Math.random() * 3 + 7) + 's';
+      document.body.appendChild(bubble);
+      setTimeout(() => bubble.remove(), 9000);
+    }
+    setInterval(createBubble, 2000); 
+
     function playMusic() {
-      var song = document.getElementById("bgMusic");
-      song.play(); document.getElementById("musicBtn").innerHTML = "❤️";
+      document.getElementById("bgMusic").play();
+      document.getElementById("musicBtn").innerHTML = "❤️";
     }
 
     function openTreasure() {
@@ -109,27 +137,13 @@
 
     let yesSize = 18;
     function growYes() {
-      yesSize += 25; // Zyada bada hoga har click pe
+      yesSize += 30;
       const yesBtn = document.getElementById("yesValBtn");
       yesBtn.style.fontSize = yesSize + "px";
       yesBtn.style.padding = (yesSize/1.2) + "px " + (yesSize*1.5) + "px";
-      
-      const noBtn = document.getElementById("noValBtn");
-      noBtn.innerText = "Sachi? 🥺";
-      if(yesSize > 120) noBtn.style.display = 'none';
+      if(yesSize > 130) document.getElementById("noValBtn").style.display = 'none';
     }
-
-    function createHeart() {
-      const heart = document.createElement('div');
-      heart.className = 'heart';
-      heart.innerHTML = '❤️';
-      heart.style.left = Math.random() * 100 + 'vw';
-      heart.style.animationDuration = (Math.random() * 2 + 3) + 's';
-      document.body.appendChild(heart);
-      setTimeout(() => heart.remove(), 5000);
-    }
-    setInterval(createHeart, 400);
   </script>
-
 </body>
 </html>
+
