@@ -11,27 +11,17 @@
     }
 
     body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Segoe UI', Arial, sans-serif;
+      margin: 0; padding: 0; font-family: 'Segoe UI', Arial, sans-serif;
       background: linear-gradient(135deg, var(--pink-bg) 0%, #ffcce0 100%);
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      overflow: hidden;
-      touch-action: manipulation;
+      height: 100vh; display: flex; justify-content: center; align-items: center;
+      overflow: hidden; touch-action: manipulation;
     }
 
     /* Floating Background Icons */
     .bg-icon {
-      position: fixed;
-      bottom: -50px;
-      z-index: 0;
-      animation: floatUp 6s linear infinite;
-      opacity: 0.5;
-      font-size: 24px;
-      pointer-events: none;
+      position: fixed; bottom: -50px; z-index: 0;
+      animation: floatUp 6s linear infinite; opacity: 0.5;
+      font-size: 24px; pointer-events: none;
     }
 
     @keyframes floatUp {
@@ -40,99 +30,39 @@
     }
 
     .container {
-      position: relative;
-      z-index: 10;
-      background: rgba(255, 255, 255, 0.75);
-      backdrop-filter: blur(15px);
-      padding: 30px;
-      border-radius: 30px;
+      position: relative; z-index: 10; background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(15px); padding: 30px; border-radius: 30px;
       box-shadow: 0 15px 35px rgba(214, 51, 132, 0.2);
       border: 1px solid rgba(255, 255, 255, 0.6);
-      width: 85%;
-      max-width: 400px;
-      text-align: center;
+      width: 85%; max-width: 400px; text-align: center;
     }
 
-    h1 {
-      color: var(--primary);
-      font-size: 1.8rem;
-      margin-bottom: 15px;
-      animation: heartBeat 1.5s infinite;
-    }
+    h1 { color: var(--primary); font-size: 1.8rem; margin-bottom: 15px; animation: heartBeat 1.5s infinite; }
 
-    @keyframes heartBeat {
-      0% { transform: scale(1); }
-      10% { transform: scale(1.05); }
-      20% { transform: scale(1); }
-    }
+    @keyframes heartBeat { 0%, 20%, 100% { transform: scale(1); } 10% { transform: scale(1.05); } }
 
-    .gif-box {
-      background: white;
-      border-radius: 20px;
-      padding: 10px;
-      margin-bottom: 20px;
-    }
+    .gif-box { background: white; border-radius: 20px; padding: 10px; margin-bottom: 20px; }
 
-    .main-gif {
-      width: 100%;
-      border-radius: 15px;
-      display: block;
-    }
+    .main-gif { width: 100%; border-radius: 15px; display: block; }
 
     p { color: #555; font-size: 1.1rem; margin: 10px 0; font-weight: 500; }
 
     .btn-group {
-      margin-top: 25px;
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-      align-items: center;
-      position: relative;
-      height: 120px; /* Space for button to move */
+      margin-top: 25px; display: flex; flex-direction: column;
+      gap: 15px; align-items: center; position: relative; height: 120px;
     }
 
     button {
-      padding: 12px 30px;
-      font-size: 16px;
-      font-weight: bold;
-      border-radius: 50px;
-      border: none;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      width: 200px;
+      padding: 12px 30px; font-size: 16px; font-weight: bold;
+      border-radius: 50px; border: none; cursor: pointer;
+      transition: all 0.3s ease; width: 200px;
     }
 
-    .yes-btn {
-      background: var(--primary);
-      color: white;
-      box-shadow: 0 5px 15px rgba(214, 51, 132, 0.4);
-      z-index: 11;
-    }
+    .yes-btn { background: var(--primary); color: white; box-shadow: 0 5px 15px rgba(214, 51, 132, 0.4); z-index: 11; }
+    .no-btn { background: white; color: var(--primary); border: 2px solid var(--primary); position: absolute; top: 65px; z-index: 12; }
 
-    .no-btn {
-      background: white;
-      color: var(--primary);
-      border: 2px solid var(--primary);
-      position: absolute;
-      top: 65px;
-      z-index: 12;
-    }
-
-    /* Sparkle Effect */
-    .sparkle {
-      position: absolute;
-      width: 5px;
-      height: 5px;
-      background: white;
-      border-radius: 50%;
-      pointer-events: none;
-      animation: sparkleAnim 0.8s linear forwards;
-    }
-
-    @keyframes sparkleAnim {
-      0% { transform: scale(0); opacity: 1; }
-      100% { transform: scale(2); opacity: 0; }
-    }
+    .sparkle { position: absolute; width: 5px; height: 5px; border-radius: 50%; pointer-events: none; animation: sparkleAnim 0.8s linear forwards; }
+    @keyframes sparkleAnim { 0% { transform: scale(0); opacity: 1; } 100% { transform: scale(2); opacity: 0; } }
   </style>
 </head>
 <body>
@@ -153,20 +83,16 @@
   </div>
 
   <script>
-    // 1. Impossible "No" Button Logic
     function moveButton() {
       const btn = document.getElementById('noBtn');
-      // Calculate random positions within the screen
       const x = Math.random() * (window.innerWidth - btn.offsetWidth);
       const y = Math.random() * (window.innerHeight - btn.offsetHeight);
-      
       btn.style.position = 'fixed';
       btn.style.left = x + 'px';
       btn.style.top = y + 'px';
       btn.innerText = "Try Again!😤";
     }
 
-    // 2. Background Decoration (Unicorns & Hearts)
     function createIcon() {
       const icons = ['🦄', '❤️', '✨', '🌸', '💖'];
       const icon = document.createElement('div');
@@ -179,11 +105,8 @@
     }
     setInterval(createIcon, 400);
 
-    // 3. Sparkle touch effect
     document.addEventListener('touchstart', (e) => {
-      for(let i=0; i<5; i++) {
-        createSparkle(e.touches[0].clientX, e.touches[0].clientY);
-      }
+      for(let i=0; i<5; i++) { createSparkle(e.touches[0].clientX, e.touches[0].clientY); }
     });
 
     function createSparkle(x, y) {
@@ -196,6 +119,5 @@
       setTimeout(() => s.remove(), 800);
     }
   </script>
-
 </body>
 </html>
