@@ -3,120 +3,125 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>For My Pookie</title>
+  <title>For My Pookie 💖</title>
   <style>
+    :root { --primary: #d63384; --pink-bg: #ffe6f0; }
+
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      text-align: center;
-      margin: 0;
-      padding: 20px;
-      background: linear-gradient(135deg, #ffe6f0 0%, #ffcce0 100%);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+      margin: 0; padding: 20px; font-family: 'Segoe UI', Tahoma, sans-serif;
+      background: linear-gradient(135deg, var(--pink-bg) 0%, #ffcce0 100%);
+      min-height: 100vh; display: flex; flex-direction: column; align-items: center;
       overflow-x: hidden;
     }
 
+    /* Floating Icons Background */
+    .heart { position: fixed; bottom: -50px; z-index: 0; animation: floatUp 5s linear infinite; opacity: 0.6; font-size: 20px; }
+    @keyframes floatUp { 0% { transform: translateY(0); opacity: 0.6; } 100% { transform: translateY(-110vh); opacity: 0; } }
+
     .container {
-      max-width: 600px;
-      background: rgba(255, 255, 255, 0.7);
-      backdrop-filter: blur(10px);
-      padding: 30px;
-      border-radius: 30px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-      margin: 20px 0;
-      border: 1px solid rgba(255, 255, 255, 0.5);
-      z-index: 1;
+      max-width: 600px; background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(12px);
+      padding: 30px; border-radius: 30px; border: 1px solid rgba(255, 255, 255, 0.5);
+      z-index: 10; text-align: left; box-shadow: 0 10px 30px rgba(0,0,0,0.1);
     }
 
-    img {
-      width: 100%;
-      max-width: 350px;
-      border-radius: 20px;
-      box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+    h1 { color: var(--primary); text-align: center; font-size: 1.8rem; }
+    
+    /* Typing Text Style */
+    #typing-text { font-size: 1.1rem; line-height: 1.8; color: #444; min-height: 100px; }
+
+    /* Treasure Box Style */
+    .treasure-box {
+      margin: 30px auto; text-align: center; cursor: pointer; transition: 0.3s;
+    }
+    .box-icon { font-size: 80px; filter: drop-shadow(0 5px 15px rgba(0,0,0,0.1)); }
+    .treasure-box:hover { transform: scale(1.1); }
+
+    /* Proposal Modal (Hidden at first) */
+    #proposal-modal {
+      display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.8); z-index: 100; justify-content: center; align-items: center;
+    }
+    .modal-content {
+      background: white; padding: 30px; border-radius: 30px; text-align: center;
+      max-width: 350px; width: 85%; border: 5px solid var(--primary);
     }
 
-    .personal {
-      margin-top: 25px;
-      font-size: 1.1rem;
-      color: #444;
-      line-height: 1.8;
-      text-align: left;
-      white-space: pre-wrap; 
-    }
+    .yes-val { background: #4CAF50; color: white; border: none; padding: 15px 30px; border-radius: 50px; font-weight: bold; cursor: pointer; font-size: 18px; margin: 10px; transition: 0.2s; }
+    .no-val { background: #f44336; color: white; border: none; padding: 10px 20px; border-radius: 50px; cursor: pointer; margin: 10px; transition: 0.2s; }
 
-    /* Music Button */
-    #musicBtn {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: #d63384;
-      color: white;
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      z-index: 100;
-      border: 2px solid white;
-      font-size: 24px;
-      box-shadow: 0 4px 15px rgba(214, 51, 132, 0.4);
-    }
-
-    .heart {
-      position: fixed;
-      color: #ff80ab;
-      font-size: 20px;
-      z-index: 0;
-      animation: float 5s linear infinite;
-    }
-
-    @keyframes float {
-      0% { transform: translateY(100vh) rotate(0deg); opacity: 1; }
-      100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
-    }
+    #musicBtn { position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 200; font-size: 24px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
   </style>
 </head>
 <body>
 
-  <audio id="mySong" loop>
+  <audio id="bgMusic" loop>
     <source src="https://www.pagalworld.com.sb/files/download/id/71068" type="audio/mpeg">
   </audio>
-
   <div id="musicBtn" onclick="playMusic()">🎵</div>
 
   <div class="container">
-    <img src="https://media.tenor.com/Fm6S_vYk_9AAAAAC/mochi-peach-cat-love.gif" alt="Happy GIF">
-    
-    <div class="personal">
-      Kitna dussa hoga Mera motu humse🥹🦄 mela pookie kuchupuchu🌸✨ iiii loveeeeee uuuu thee mosttt🥹🫀💕 hum ye website kafi time se bna raha tha humse ho nhi Raha tha🥺 abhi bhi pta noi kab complete hoga☹️🤌🏻 first time bna raha 🥺💗.. i lovee youu💕 and I miss u🥺🎀🎀 n i always think and imagine fucking youu🦄
-      
-      <h3 style="color: #d63384; text-align: center;">I lovee youu mela bachuu 🥹🎀🦄🎀</h3>
-    </div>
+    <h1>Thankkk youuu Baby! 🥹💕</h1>
+    <div id="typing-text"></div>
 
-    <button style="padding: 10px 20px; border-radius: 20px; border: none; background: #d63384; color: white; cursor: pointer; margin-top: 15px;" onclick="window.location.href='index.html'">Go Back</button>
+    <div class="treasure-box" onclick="openTreasure()">
+      <div class="box-icon">🎁</div>
+      <p style="font-weight: bold; color: var(--primary);">Ek chota sa surprise hai... Click me! ✨</p>
+    </div>
+  </div>
+
+  <div id="proposal-modal">
+    <div class="modal-content">
+      <img src="https://media.tenor.com/7YOnz0v3V80AAAAC/mochi-mochi-peach-cat-peach-cat.gif" width="150">
+      <h2 style="color: var(--primary);">Will you be my Valentine? 🥹🌹</h2>
+      <button id="yesValBtn" class="yes-val" onclick="location.href='final.html'">YES! 😍</button>
+      <button id="noValBtn" class="no-val" onclick="growYes()">No ☹️</button>
+    </div>
   </div>
 
   <script>
+    // 1. Typing Effect Logic
+    const message = "Kitna gussa hoga Mera motu humse🥹🦄 mela pookie kuchupuchu🌸✨ iiii loveeeeee uuuu thee mosttt🥹🫀💕 hum ye website kafi time se bna raha tha... I was so horny baby jii🥵 aur us snap k baad ufff🤤 heartattack aa raha tha... I promise main hamesha tumhara khayal rakhunga 🙏💖";
+    let i = 0;
+    function typeWriter() {
+      if (i < message.length) {
+        document.getElementById("typing-text").innerHTML += message.charAt(i);
+        i++;
+        setTimeout(typeWriter, 50).then(window.scrollTo(0, document.body.scrollHeight));
+      }
+    }
+    window.onload = typeWriter;
+
+    // 2. Music Logic
     function playMusic() {
-      var song = document.getElementById("mySong");
-      song.play().then(() => {
-        document.getElementById("musicBtn").innerHTML = "❤️";
-      }).catch(error => {
-        alert("Please tap again to play music! 🎵");
-      });
+      var song = document.getElementById("bgMusic");
+      song.play(); document.getElementById("musicBtn").innerHTML = "❤️";
     }
 
-    // Hearts Animation
+    // 3. Treasure Box Logic
+    function openTreasure() {
+      document.getElementById("proposal-modal").style.display = "flex";
+    }
+
+    // 4. Growing Yes Button Logic
+    let yesSize = 18;
+    function growYes() {
+      yesSize += 15;
+      const yesBtn = document.getElementById("yesValBtn");
+      yesBtn.style.fontSize = yesSize + "px";
+      yesBtn.style.padding = (yesSize/1.2) + "px " + (yesSize*1.5) + "px";
+      
+      const noBtn = document.getElementById("noValBtn");
+      noBtn.innerText = "Sachi? 🥺";
+      if(yesSize > 100) noBtn.style.display = 'none'; // No button gayab ho jayega
+    }
+
+    // Hearts background
     function createHeart() {
       const heart = document.createElement('div');
-      heart.classList.add('heart');
+      heart.className = 'heart';
       heart.innerHTML = '❤️';
       heart.style.left = Math.random() * 100 + 'vw';
-      heart.style.animationDuration = (Math.random() * 3 + 2) + 's';
+      heart.style.animationDuration = (Math.random() * 2 + 3) + 's';
       document.body.appendChild(heart);
       setTimeout(() => heart.remove(), 5000);
     }
